@@ -1429,7 +1429,7 @@ def categories():
 			case "8":
 				exploitationTool()
 			case "9":
-				forensicsToools()
+				forensicsTools()
 			case "10":
 				stressTest()
 			case "11":
