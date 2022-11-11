@@ -3,9 +3,9 @@
 import os,sys, traceback,time
 
 
-#if os.getuid() != 0:
-#	print ("Sorry. This script requires sudo privledges")
-#	sys.exit()
+if os.getuid() != 0:
+	print ("Sorry. This script requires sudo privledges")
+	sys.exit()
 def main():
 	try:
 		titlePrint()
