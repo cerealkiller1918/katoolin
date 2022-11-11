@@ -1,16 +1,16 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import os,sys, traceback,time
 
 
-if os.getuid() != 0:
-	print ("Sorry. This script requires sudo privledges")
-	sys.exit()
+# if os.getuid() != 0:
+# 	print ("Sorry. This script requires sudo privledges")
+# 	sys.exit()
 def main():
 	try:
 		titlePrint()
 		time.sleep(1)
-		start()
+		mainMenu()
 	except KeyboardInterrupt:
 		leave()
 	except Exception:
@@ -50,9 +50,6 @@ For more information , please visit : http://www.florian-diesch.de/software/clas
 
 ''')
 
-def start():
-	mainMenu()
-	categories()
 
 def helpPrint():
 	print (''' 
@@ -90,12 +87,11 @@ def mainMenu():
 
 		match input("\033[1;36mkat > \033[1;m"):
 			case "1":
-				break	
 				add_and_remove_kali()
-			case "2":
 				break
+			case "2":
 				categories()
-				
+				break
 			case "3":
 				classicMenuPrint()
 				repo = input("\033[1;32mDo you want to install classicmenu indicator ? [y/n]> \033[1;m")
@@ -120,7 +116,7 @@ def add_and_remove_kali():
 	while True:
 		print ('''1) Add kali linux repositories\n2) Update\n3) Remove all kali linux repositories\n4) View the contents of sources.list file\n''')
 						 
-		match input("\033[1;32mWhat do you want to do ?> \033[1;m"):
+		match input("\033[1;36mkat > \033[1;m"):
 			case "1":
 				# Adds the Kali linux repo 
 				cmd1 = os.system("apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ED444FF07D8D0BF6")
@@ -147,11 +143,14 @@ def add_and_remove_kali():
 				fout.close()
 				print ("\033[1;31m\nAll kali linux repositories have been deleted !\n\033[1;m")
 			case "back":
-				break
-				start()
+				mainMenu()
+				break 
 			case "gohome":
+				main()
 				break
-				start()
+			case "exit":
+				leave()
+				break
 			case "4":
 				file = open('/etc/apt/sources.list', 'r')
 
@@ -163,7 +162,7 @@ def add_and_remove_kali():
 def installAllPackages():
 	cmd = os.system("apt -f install acccheck ace-voip amap automater braa casefile cdpsnarf cisco-torch cookie-cadger copy-router-config dmitry dnmap dnsenum dnsmap dnsrecon dnstracer dnswalk dotdotpwn enum4linux enumiax exploitdb fierce firewalk fragroute fragrouter ghost-phisher golismero goofile lbd maltego-teeth masscan metagoofil miranda nmap p0f parsero recon-ng set smtp-user-enum snmpcheck sslcaudit sslsplit sslstrip sslyze thc-ipv6 theharvester tlssled twofi urlcrazy wireshark wol-e xplico ismtp intrace hping3 bbqsql bed cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch copy-router-config doona dotdotpwn greenbone-security-assistant hexorbase jsql lynis nmap ohrwurm openvas-cli openvas-manager openvas-scanner oscanner powerfuzzer sfuzz sidguesser siparmyknife sqlmap sqlninja sqlsus thc-ipv6 tnscmd10g unix-privesc-check yersinia aircrack-ng asleap bluelog blueranger bluesnarfer bully cowpatty crackle eapmd5pass fern-wifi-cracker ghost-phisher giskismet gqrx kalibrate-rtl killerbee kismet mdk3 mfcuk mfoc mfterm multimon-ng pixiewps reaver redfang spooftooph wifi-honey wifitap wifite apache-users arachni bbqsql blindelephant burpsuite cutycapt davtest deblaze dirb dirbuster fimap funkload grabber jboss-autopwn joomscan jsql maltego-teeth padbuster paros parsero plecost powerfuzzer proxystrike recon-ng skipfish sqlmap sqlninja sqlsus ua-tester uniscan vega w3af webscarab websploit wfuzz wpscan xsser zaproxy burpsuite dnschef fiked hamster-sidejack hexinject iaxflood inviteflood ismtp mitmproxy ohrwurm protos-sip rebind responder rtpbreak rtpinsertsound rtpmixsound sctpscan siparmyknife sipp sipvicious sniffjoke sslsplit sslstrip thc-ipv6 voiphopper webscarab wifi-honey wireshark xspy yersinia zaproxy cryptcat cymothoa dbd dns2tcp http-tunnel httptunnel intersect nishang polenum powersploit pwnat ridenum sbd u3-pwn webshells weevely casefile cutycapt dos2unix dradis keepnote magictree metagoofil nipper-ng pipal armitage backdoor-factory cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch crackle jboss-autopwn linux-exploit-suggester maltego-teeth set shellnoob sqlmap thc-ipv6 yersinia beef-xss binwalk bulk-extractor chntpw cuckoo dc3dd ddrescue dumpzilla extundelete foremost galleta guymager iphone-backup-analyzer p0f pdf-parser pdfid pdgmail peepdf volatility xplico dhcpig funkload iaxflood inviteflood ipv6-toolkit mdk3 reaver rtpflood slowhttptest t50 termineter thc-ipv6 thc-ssl-dos acccheck burpsuite cewl chntpw cisco-auditing-tool cmospwd creddump crunch findmyhash gpp-decrypt hash-identifier hexorbase john johnny keimpx maltego-teeth maskprocessor multiforcer ncrack oclgausscrack pack patator polenum rainbowcrack rcracki-mt rsmangler statsprocessor thc-pptp-bruter truecrack webscarab wordlists zaproxy apktool dex2jar python-distorm3 edb-debugger jad javasnoop jd ollydbg smali valgrind yara android-sdk apktool arduino dex2jar sakis3g smali && wget http://www.morningstarsecurity.com/downloads/bing-ip2hosts-0.4.tar.gz && tar -xzvf bing-ip2hosts-0.4.tar.gz && cp bing-ip2hosts-0.4/bing-ip2hosts /usr/local/bin/")	
 
-def printInfoGathering()
+def printInfoGathering():
 	print ('''
 \033[1;36m=+[ Information Gathering\033[1;m
 
@@ -320,11 +319,13 @@ def informationGathering():
 			case "57":
 				cmd = os.system("apt install hping3")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()	
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()
 			case "0":
 				cmd = os.system("apt install -y acccheck ace-voip amap automater braa casefile cdpsnarf cisco-torch cookie-cadger copy-router-config dmitry dnmap dnsenum dnsmap dnsrecon dnstracer dnswalk dotdotpwn enum4linux enumiax exploitdb fierce firewalk fragroute fragrouter ghost-phisher golismero goofile lbd maltego-teeth masscan metagoofil miranda nmap p0f parsero recon-ng set smtp-user-enum snmpcheck sslcaudit sslsplit sslstrip sslyze thc-ipv6 theharvester tlssled twofi urlcrazy wireshark wol-e xplico ismtp intrace hping3 && wget http://www.morningstarsecurity.com/downloads/bing-ip2hosts-0.4.tar.gz && tar -xzvf bing-ip2hosts-0.4.tar.gz && cp bing-ip2hosts-0.4/bing-ip2hosts /usr/local/bin/")				
 			case _:
@@ -363,10 +364,8 @@ def vulnerabilityAnalysis():
 		match input("\033[1;36mkat > \033[1;m"):
 			case "1":
 				cmd = os.system("apt install bbqsql")
-
 			case "2":
 				cmd = os.system("apt install bed")
-
 			case "3":
 				cmd = os.system("apt install cisco-auditing-tool")
 			case "4":
@@ -434,11 +433,13 @@ def vulnerabilityAnalysis():
 			case "35":
 				cmd = os.system("apt install yersinia")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()						
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()						
 			case "0":
 				cmd = os.system("apt install -y bbqsql bed cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch copy-router-config doona dotdotpwn greenbone-security-assistant hexorbase jsql lynis nmap ohrwurm openvas-cli openvas-manager openvas-scanner oscanner powerfuzzer sfuzz sidguesser siparmyknife sqlmap sqlninja sqlsus thc-ipv6 tnscmd10g unix-privesc-check yersinia")						
 			case _:
@@ -550,11 +551,13 @@ def passwordAttacks():
 			case "36":
 				cmd = os.system("apt install zaproxy")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()   
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()  
 			case "0":
 				cmd = os.system("apt install -y acccheck burpsuite cewl chntpw cisco-auditing-tool cmospwd creddump crunch findmyhash gpp-decrypt hash-identifier hexorbase john johnny keimpx maltego-teeth maskprocessor multiforcer ncrack oclgausscrack pack patator polenum rainbowcrack rcracki-mt rsmangler statsprocessor thc-pptp-bruter truecrack webscarab wordlists zaproxy")
 			case _:
@@ -653,11 +656,13 @@ def wirelessAttacks():
 			case "0":
 				cmd = os.system("apt install -y aircrack-ng asleap bluelog blueranger bluesnarfer bully cowpatty crackle eapmd5pass fern-wifi-cracker ghost-phisher giskismet gqrx kalibrate-rtl killerbee kismet mdk3 mfcuk mfoc mfterm multimon-ng pixiewps reaver redfang spooftooph wifi-honey wifitap wifite")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()						
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()					
 			case _:
 				wrongChoice()
 def printWebApps():
@@ -779,11 +784,13 @@ def webApps():
 			case "41":
 				cmd = os.system("apt install zaproxy")										
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()	
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()
 			case "0":
 				cmd = os.system("apt install -y apache-users arachni bbqsql blindelephant burpsuite cutycapt davtest deblaze dirb dirbuster fimap funkload grabber jboss-autopwn joomscan jsql maltego-teeth padbuster paros parsero plecost powerfuzzer proxystrike recon-ng skipfish sqlmap sqlninja sqlsus ua-tester uniscan vega w3af webscarab websploit wfuzz wpscan xsser zaproxy")												
 			case _:
@@ -885,11 +892,13 @@ def sniffinfSpoofing():
 			case "32":
 				cmd = os.system("apt install zaproxy -y")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()
 			case "0":
 				cmd = os.system("apt install -y burpsuite dnschef fiked hamster-sidejack hexinject iaxflood inviteflood ismtp mitmproxy ohrwurm protos-sip rebind responder rtpbreak rtpinsertsound rtpmixsound sctpscan siparmyknife sipp sipvicious sniffjoke sslsplit sslstrip thc-ipv6 voiphopper webscarab wifi-honey wireshark xspy yersinia zaproxy")  
 			case _:
@@ -922,7 +931,7 @@ def printMaintainingAccess():
 		print ("\033[1;32mInsert the number of the tool to install it .\n\033[1;m")
 
 def maintainingAccess():
-	while True
+	while True:
 		printMaintainingAccess()
 		match input("\033[1;36mkat > \033[1;m"):
 			case "1":
@@ -958,11 +967,13 @@ def maintainingAccess():
 			case "16":
 				cmd = os.system("apt install weevely")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()   
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()   
 			case "0":
 				cmd = os.system("apt install -y cryptcat cymothoa dbd dns2tcp http-tunnel httptunnel intersect nishang polenum powersploit pwnat ridenum sbd u3-pwn webshells weevely")
 			case _:
@@ -1009,11 +1020,13 @@ def reportingTools():
 			case "9":
 				cmd = os.system("apt install pipal")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()   
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()  
 			case "0":
 				cmd = os.system("apt install -y casefile cutycapt dos2unix dradis keepnote magictree metagoofil nipper-ng pipal")  
 			case _:
@@ -1084,11 +1097,13 @@ def exploitationTool():
 			case "17":
 				cmd = os.system("apt install yersinia")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()   
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave() 
 			case "0":
 				cmd = os.system("apt install -y armitage backdoor-factory cisco-auditing-tool cisco-global-exploiter cisco-ocs cisco-torch crackle jboss-autopwn linux-exploit-suggester maltego-teeth set shellnoob sqlmap thc-ipv6 yersinia beef-xss")  						
 			case _:
@@ -1168,11 +1183,13 @@ def forensicsTools():
 			case "23":
 				cmd = os.system("apt install xplico")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()   
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()  
 			case "0":
 				cmd = os.system("apt install -y binwalk bulk-extractor chntpw cuckoo dc3dd ddrescue dumpzilla extundelete foremost galleta guymager iphone-backup-analyzer p0f pdf-parser pdfid pdgmail peepdf volatility xplico")						
 			case _:
@@ -1236,11 +1253,13 @@ def stressTest():
 			case "14":
 				cmd = os.system("apt install thc-ssl-dos ")    				             										
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()   
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()   
 			case "0":
 				cmd = os.system("apt install -y dhcpig funkload iaxflood inviteflood ipv6-toolkit mdk3 reaver rtpflood slowhttptest t50 termineter thc-ipv6 thc-ssl-dos")
 			case _:
@@ -1295,11 +1314,13 @@ def reverseEngineering():
 			case "11":
 				cmd = os.system("apt install YARA")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()   
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()
 			case "0":
 				cmd = os.system("apt install -y apktool dex2jar python-diStorm3 edb-debugger jad javasnoop JD OllyDbg smali Valgrind YARA")
 			case _:
@@ -1338,11 +1359,13 @@ def hardwareHacking():
 			case "6":
 				cmd = os.system("apt install smali")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()   
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()   
 			case "0":
 				cmd = os.system("apt install -y android-sdk apktool arduino dex2jar sakis3g smali")
 			case _:
@@ -1365,11 +1388,14 @@ def extra():
 				cmd = os.system("apt install squid3")
 				print (" ")
 			case "back":
-				break
 				categories()
-			case "gohome":
 				break
-				start()
+			case "gohome":
+				mainMenu()
+				break
+			case "exit":
+				leave()
+				break 
 			case _:
 				wrongChoice()
 
@@ -1379,11 +1405,11 @@ def categories():
 
 		match input("\033[1;36mkat > \033[1;m"):
 			case "back":
+				mainMenu()
 				break
-				start()
 			case "gohome":
+				mainMenu()
 				break
-				start()
 			case "0":
 				installAllPackages()
 			case "1":
@@ -1414,16 +1440,18 @@ def categories():
 				hardwareHacking()
 			case "14" :
 				extra()
+			case "exit":
+				leave()
 			case _:
 				wrongChoice()
 
 def wrongChoice():
-	cmd = os.system("clear")
-	cmd = os.system('spd-say "Sorry, that was an invalid command"')
+	# cmd = os.system("clear")
+	# cmd = os.system('spd-say "Sorry, that was an invalid command"')
 	print ("\n\033[1;31mSorry, that was an invalid command!\033[1;m\n")
-	time.sleep(2) 
+	# time.sleep(2) 
 def leave():
-	cmd = os.system('spd-say "Goodbye"')
+	# cmd = os.system('spd-say "Goodbye"')
 	print ("Shutdown requested...Goodbye...")
 	time.sleep(2)
 	sys.exit()
