@@ -11,11 +11,32 @@ Automatically install all Kali linux tools
 - Python 3
 - An operating system (tested on Ubuntu)
 
-# Installation
-- sudo su
-- git clone https://github.com/cerealkiller1918/katoolin && cp katoolin/katoolin.py /usr/bin/katoolin
-- chmod +x /usr/bin/katoolin
-- sudo katoolin 
+# Installation with git
+```
+sudo su
+```
+```
+git clone https://github.com/cerealkiller1918/katoolin && cp katoolin/katoolin.py /usr/bin/katoolin
+```
+```
+chmod +x /usr/bin/katoolin
+```
+```
+sudo katoolin 
+```
+# Installation with wget
+```
+cd /usr/bin/
+```
+```
+sudo wget https://raw.githubusercontent.com/cerealkiller1918/katoolin/master/katoolin.py 
+```
+```
+sudo chmod +x katoolin.py
+```
+```
+sudo katoolin.py
+```
 
 # Video
 https://www.youtube.com/watch?v=8VxCWVoZEEE
