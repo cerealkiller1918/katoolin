@@ -26,13 +26,11 @@ sudo katoolin
 ```
 # Installation with wget
 ```
-cd /usr/bin/
+sudo wget https://raw.githubusercontent.com/cerealkiller1918/katoolin/master/katoolin.py -o /usr/bin/katoolin.py
 ```
+
 ```
-sudo wget https://raw.githubusercontent.com/cerealkiller1918/katoolin/master/katoolin.py 
-```
-```
-sudo chmod +x katoolin.py
+sudo chmod +x /usr/bin/katoolin.py
 ```
 ```
 sudo katoolin.py
