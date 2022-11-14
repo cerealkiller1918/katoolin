@@ -12,14 +12,12 @@ Automatically install all Kali linux tools
 - An operating system (tested on Ubuntu)
 
 # Installation with git
+
 ```
-sudo su
-```
-```
-git clone https://github.com/cerealkiller1918/katoolin && cp katoolin/katoolin.py /usr/bin/katoolin
+sudo git clone https://github.com/cerealkiller1918/katoolin && cp katoolin/katoolin.py /usr/bin/katoolin
 ```
 ```
-chmod +x /usr/bin/katoolin
+sudo chmod +x /usr/bin/katoolin
 ```
 ```
 sudo katoolin 
